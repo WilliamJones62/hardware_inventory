@@ -1,0 +1,52 @@
+<h1>Showing Hardware</h1>
+<p id="notice"><%= notice %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Employee</th>
+      <th>Device</th>
+      <th>ID</th>
+      <th>Date Issued</th>
+      <th>Date Returned</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td> <%= @hardware.owner  %> </td>
+      <td> <%= @hardware.make  %> </td>
+      <td> <%= @hardware.serial_number  %> </td>
+      <td> <%= display_date(@hardware.issue_date)  %> </td>
+      <td> <%= display_date(@hardware.return_date)  %> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Employee details</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Phone</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td> <%= @employee.phone  %> </td>
+      <td> <%= @employee.email  %> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>
+  <strong>Image:</strong>
+  <% if @employee.image.blank? %>
+    No image
+  <% else %>
+    <%= image_tag "http://employees.dartagnan.com/uploads/employee/image/"+@employee.id.to_s+"/normal_"+@employee.image %>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_hardware_path(@hardware) %>
+<%= link_to 'List', hardwares_path %>

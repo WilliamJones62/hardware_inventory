@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Hardware</h1>
+
+<table id="normal_dt"  class="stripe" class="mytable" class="display" cellspacing="0" >
+  <thead>
+    <tr>
+      <th>Employee</th>
+      <th>Device</th>
+      <th>ID</th>
+      <th>Returned?</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @hardwares.each do |hardware| %>
+      <tr>
+        <td><%= hardware.owner %></td>
+        <td><%= hardware.make %></td>
+        <td><%= hardware.serial_number %></td>
+        <% if hardware.return_date.blank? %>
+          <td> No </td>
+        <% else %>
+          <td> Yes </td>
+        <% end %>
+        <td><%= link_to 'Show', hardware %></td>
+        <td><%= link_to 'Edit', edit_hardware_path(hardware) %></td>
+        <td><%= link_to 'Delete', hardware, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Hardware', new_hardware_path %>

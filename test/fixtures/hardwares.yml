@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  owner: MyString
+  host: MyString
+  os: MyString
+  os_version: MyString
+  install_date: 2019-05-09
+  boot_time: 2019-05-09
+  make: MyString
+  model: MyString
+  type: 
+  processor: MyString
+  physical_memory: 1
+  available_physical_memory: 1
+  serial_number: MyString
+
+two:
+  owner: MyString
+  host: MyString
+  os: MyString
+  os_version: MyString
+  install_date: 2019-05-09
+  boot_time: 2019-05-09
+  make: MyString
+  model: MyString
+  type: 
+  processor: MyString
+  physical_memory: 1
+  available_physical_memory: 1
+  serial_number: MyString
