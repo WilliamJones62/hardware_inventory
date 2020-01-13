@@ -1,11 +1,13 @@
 <h2 class="primary-logo">
 </h2>
-<nav class="">
-    <ul>
-        <span id="navbar">
-        </span>
-    </ul>
-</nav>
+<span id="navbar">
+  <span><a href="/", class="btn btn-primary">Index</a></span>
+  <% if user_signed_in? %>
+    <span><%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: "btn btn-primary" %></span>
+  <% else %>
+    <span><%= link_to 'Sign in', new_user_session_path, class: "btn btn-primary" %></span>
+  <% end %>
+</span>
 <br>
 <h1 class="title">Hardware Inventory</h1>
 <br>

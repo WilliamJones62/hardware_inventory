@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191010184737) do
+ActiveRecord::Schema.define(version: 20191106181829) do
 
   create_table "employees", force: :cascade do |t|
     t.string "Employee_Status"
@@ -21,6 +21,9 @@ ActiveRecord::Schema.define(version: 20191010184737) do
     t.string "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "Cost_Center_Code"
+    t.string "Department"
+    t.string "Badge_"
   end
 
   create_table "hardwares", force: :cascade do |t|
@@ -42,6 +45,36 @@ ActiveRecord::Schema.define(version: 20191010184737) do
     t.date "issue_date"
     t.date "return_date"
     t.integer "employee_id"
+    t.boolean "truck"
+    t.boolean "dock"
+    t.boolean "monitor"
+    t.date "disposed_date"
+    t.string "disposed_reason"
+    t.string "computer_name"
+    t.string "phone_number"
+    t.string "imei"
+    t.string "toner_ink"
+  end
+
+  create_table "trucks", force: :cascade do |t|
+    t.string "location"
+    t.string "truck_number"
+    t.boolean "start_decommission"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "hardware"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
 end

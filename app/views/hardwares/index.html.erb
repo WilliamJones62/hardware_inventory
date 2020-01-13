@@ -5,11 +5,11 @@
 <table id="normal_dt"  class="stripe" class="mytable" class="display" cellspacing="0" >
   <thead>
     <tr>
-      <th>Employee</th>
+      <th>Employee/Truck</th>
       <th>Device</th>
-      <th>ID</th>
+      <th>Serial number</th>
       <th>Returned?</th>
-      <th></th>
+      <th>In stock?</th>
       <th></th>
       <th></th>
     </tr>
@@ -19,14 +19,18 @@
     <% @hardwares.each do |hardware| %>
       <tr>
         <td><%= hardware.owner %></td>
-        <td><%= hardware.make %></td>
+        <td><%= hardware.device_type %></td>
         <td><%= hardware.serial_number %></td>
-        <% if hardware.return_date.blank? %>
+        <% if hardware.return_date.blank? || hardware.return_date < hardware.issue_date %>
           <td> No </td>
         <% else %>
           <td> Yes </td>
         <% end %>
-        <td><%= link_to 'Show', hardware %></td>
+        <% if hardware.issue_date.blank? || (!hardware.return_date.blank? && hardware.return_date >= hardware.issue_date) %>
+          <td> Yes </td>
+        <% else %>
+          <td> No </td>
+        <% end %>
         <td><%= link_to 'Edit', edit_hardware_path(hardware) %></td>
         <td><%= link_to 'Delete', hardware, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

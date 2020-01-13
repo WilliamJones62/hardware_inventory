@@ -14,20 +14,156 @@
   <table>
     <thead>
       <tr>
-        <th> <%= form.label :owner, "Employee" %> </th>
-        <th> <%= form.label :make, "Device" %> </th>
-        <th> <%= form.label :serial_number, "ID" %> </th>
-        <th> <%= form.label :issue_date %> </th>
-        <th> <%= form.label :return_date %> </th>
+        <th> <%= form.label :device_type, "Device" %> </th>
+        <% if @tablet %>
+          <th> <%= form.label :truck, "Truck?", :id=> 'TruckHeader' %> </th>
+        <% else %>
+          <th> <%= form.label :truck, "Truck?", :id=> 'TruckHeader', :style=> "display: none;"  %> </th>
+        <% end %>
+        <th> <%= form.label :owner, "Employee/Truck" %> </th>
+        <th> <%= form.label :serial_number, "Serial number" %> </th>
+        <th> <%= form.label :make %> </th>
+        <th> <%= form.label :model %> </th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td> <%= form.select :owner, @employee_list, {:include_blank => true}, {:value => params[:owner]} %></td>
-        <td> <%= form.select :make, @device, {}, {:value => params[:owner]} %></td>
+        <% if @new %>
+          <td> <%= form.select :device_type, @device, {}, {:value => params[:owner], id: "DeviceType", :oninput=> ("setTruckSw()")} %></td>
+        <% else %>
+          <td> <%= form.text_field :device_type, :readonly => true %> </td>
+        <% end %>
+        <% if @tablet %>
+          <td> <%= form.check_box :truck, {:id=> 'TruckSw', :oninput=> ("setOwnerList()")} %> </td>
+        <% else %>
+          <td> <%= form.check_box :truck, {:id=> 'TruckSw', :style=> "display: none;", :oninput=> ("setOwnerList()")} %> </td>
+        <% end %>
+        <td> <%= form.select :owner, @employee_list, {include_blank: true}, {:id => 'OwnerList', :value => params[:owner]} %></td>
         <td> <%= form.text_field :serial_number  %> </td>
+        <td> <%= form.text_field :make  %> </td>
+        <td> <%= form.text_field :model  %> </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <% if @new || @laptop || @desktop %>
+    <table id=LapDesk>
+  <% else %>
+    <table id=LapDesk class="invisible">
+  <% end %>
+    <thead>
+      <tr>
+        <th> <%= form.label :computer_name %> </th>
+        <th> <%= form.label :os, "Operating system" %> </th>
+        <th> <%= form.label :install_date %> </th>
+        <th> <%= form.label :physical_memory %> </th>
+        <th> <%= form.label :processor %> </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td> <%= form.text_field :computer_name  %> </td>
+        <td> <%= form.select :os, @os, {}, {:value => params[:os]} %></td>
+        <td> <%= form.date_field :install_date %> </td>
+        <td> <%= form.number_field :physical_memory %> </td>
+        <td> <%= form.text_field :processor  %> </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <% if @laptop %>
+    <table id=LapTop>
+  <% else %>
+    <table id=LapTop class="invisible">
+  <% end %>
+    <thead>
+      <tr>
+        <th> <%= form.label :dock, "Docking station?" %> </th>
+        <th> <%= form.label :monitor, "Monitor?" %> </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td> <%= form.check_box :dock, {:id => 'DockSw',} %> </td>
+        <td> <%= form.check_box :monitor, {:id => 'MonitorSw',} %> </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <% if @phone %>
+    <table id=Phone>
+  <% else %>
+    <table id=Phone class="invisible">
+  <% end %>
+    <thead>
+      <tr>
+        <th> <%= form.label :imei, "IMEI" %> </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td> <%= form.text_field :imei  %> </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <% if @tablet || @phone %>
+    <table id=Tablet>
+  <% else %>
+    <table id=Tablet class="invisible">
+  <% end %>
+    <thead>
+      <tr>
+        <th> <%= form.label :phone_number %> </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td> <%= form.text_field :phone_number  %> </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <% if @printer %>
+    <table id=Printer>
+  <% else %>
+    <table id=Printer class="invisible">
+  <% end %>
+    <thead>
+      <tr>
+        <th> <%= form.label :toner_ink %> </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td> <%= form.text_field :toner_ink  %> </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table>
+    <thead>
+      <tr>
+        <th> <%= form.label :receive_date %> </th>
+        <th> <%= form.label :issue_date %> </th>
+        <th> <%= form.label :return_date %> </th>
+        <th> <%= form.label :disposed_date %> </th>
+        <th> <%= form.label :disposed_reason %> </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td> <%= form.date_field :receive_date %> </td>
         <td> <%= form.date_field :issue_date %> </td>
-        <td> <%= form.date_field :return_date %> </td>
+        <% if @new %>
+          <td> <%= form.date_field :return_date, :readonly => true %> </td>
+          <td> <%= form.date_field :disposed_date, :readonly => true %> </td>
+          <td> <%= form.text_field :disposed_reason, :readonly => true %></td>
+        <% else %>
+          <td> <%= form.date_field :return_date %> </td>
+          <td> <%= form.date_field :disposed_date %> </td>
+          <td> <%= form.select :disposed_reason, @disposal_reason, {include_blank: true}, {:value => params[:disposed_reason]} %></td>
+        <% end %>
       </tr>
     </tbody>
   </table>
@@ -36,3 +172,5 @@
     <%= form.submit %>
   </div>
 <% end %>
+<p id= "employees" hidden> <%= @tilda_employee_list %> </p>
+<p id= "trucks" hidden> <%= @trucks %> </p>
