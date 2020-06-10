@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  region: MyString
+  route: MyString
+  town: MyString
+  order_stat: MyString
+  dueout_date: 2020-04-30
+  ext_price: 1.5
+  no_orders: 1
+
+two:
+  region: MyString
+  route: MyString
+  town: MyString
+  order_stat: MyString
+  dueout_date: 2020-04-30
+  ext_price: 1.5
+  no_orders: 1

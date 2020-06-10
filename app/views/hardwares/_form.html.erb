@@ -34,11 +34,14 @@
           <td> <%= form.text_field :device_type, :readonly => true %> </td>
         <% end %>
         <% if @tablet %>
-          <td> <%= form.check_box :truck, {:id=> 'TruckSw', :oninput=> ("setOwnerList()")} %> </td>
+          <!-- <td> <%= form.check_box :truck, {:id=> 'TruckSw', :oninput=> ("setOwnerList()")} %> </td> -->
+          <td> <%= form.check_box :truck, {:id=> 'TruckSw'} %> </td>
         <% else %>
-          <td> <%= form.check_box :truck, {:id=> 'TruckSw', :style=> "display: none;", :oninput=> ("setOwnerList()")} %> </td>
+          <!-- <td> <%= form.check_box :truck, {:id=> 'TruckSw', :style=> "display: none;", :oninput=> ("setOwnerList()")} %> </td> -->
+          <td> <%= form.check_box :truck, {:id=> 'TruckSw', :style=> "display: none;"} %> </td>
         <% end %>
-        <td> <%= form.select :owner, @employee_list, {include_blank: true}, {:id => 'OwnerList', :value => params[:owner]} %></td>
+        <!-- <td> <%= form.select :owner, @employee_list, {include_blank: true}, {:id => 'OwnerList', :value => params[:owner]} %></td> -->
+        <td> <%= form.text_field :owner %></td>
         <td> <%= form.text_field :serial_number  %> </td>
         <td> <%= form.text_field :make  %> </td>
         <td> <%= form.text_field :model  %> </td>
