@@ -5,6 +5,7 @@
 <table id="normal_dt"  class="stripe" class="mytable" class="display" cellspacing="0" >
   <thead>
     <tr>
+      <th>Manufacture Year</th>
       <th>Employee/Truck</th>
       <th>Device</th>
       <th>Serial number</th>
@@ -18,6 +19,7 @@
   <tbody>
     <% @hardwares.each do |hardware| %>
       <tr>
+        <td><%= hardware.manufacture_year %></td>
         <td><%= hardware.owner %></td>
         <td><%= hardware.device_type %></td>
         <td><%= hardware.serial_number %></td>

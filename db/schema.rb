@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200430125327) do
+ActiveRecord::Schema.define(version: 20200716182600) do
 
   create_table "employees", force: :cascade do |t|
     t.string "Employee_Status"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20200430125327) do
     t.string "phone_number"
     t.string "imei"
     t.string "toner_ink"
+    t.string "manufacture_year"
   end
 
   create_table "summaries", force: :cascade do |t|

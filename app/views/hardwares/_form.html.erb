@@ -33,7 +33,7 @@
         <% else %>
           <td> <%= form.text_field :device_type, :readonly => true %> </td>
         <% end %>
-        <% if @tablet %>
+        <% if @tablet || @other %>
           <!-- <td> <%= form.check_box :truck, {:id=> 'TruckSw', :oninput=> ("setOwnerList()")} %> </td> -->
           <td> <%= form.check_box :truck, {:id=> 'TruckSw'} %> </td>
         <% else %>
@@ -49,7 +49,7 @@
     </tbody>
   </table>
 
-  <% if @new || @laptop || @desktop %>
+  <% if @new || @laptop || @desktop || @other %>
     <table id=LapDesk>
   <% else %>
     <table id=LapDesk class="invisible">
@@ -74,7 +74,7 @@
     </tbody>
   </table>
 
-  <% if @laptop %>
+  <% if @laptop || @other %>
     <table id=LapTop>
   <% else %>
     <table id=LapTop class="invisible">
@@ -93,7 +93,7 @@
     </tbody>
   </table>
 
-  <% if @phone %>
+  <% if @phone || @other %>
     <table id=Phone>
   <% else %>
     <table id=Phone class="invisible">
@@ -110,7 +110,7 @@
     </tbody>
   </table>
 
-  <% if @tablet || @phone %>
+  <% if @tablet || @phone || @ipad || @other %>
     <table id=Tablet>
   <% else %>
     <table id=Tablet class="invisible">
@@ -127,7 +127,7 @@
     </tbody>
   </table>
 
-  <% if @printer %>
+  <% if @printer || @other %>
     <table id=Printer>
   <% else %>
     <table id=Printer class="invisible">
@@ -147,6 +147,7 @@
   <table>
     <thead>
       <tr>
+        <th> <%= form.label :manufacture_year %> </th>
         <th> <%= form.label :receive_date %> </th>
         <th> <%= form.label :issue_date %> </th>
         <th> <%= form.label :return_date %> </th>
@@ -156,6 +157,7 @@
     </thead>
     <tbody>
       <tr>
+        <td> <%= form.text_field :manufacture_year, maxlength: "4" %> </td>
         <td> <%= form.date_field :receive_date %> </td>
         <td> <%= form.date_field :issue_date %> </td>
         <% if @new %>

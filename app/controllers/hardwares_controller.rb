@@ -120,7 +120,12 @@ class HardwaresController < ApplicationController
       @desktop = false
       @phone = false
       @printer = false
+      @ipad = false
+      @other = false
       if @hardware
+        if @hardware.device_type == "iPad"
+          @ipad = true
+        end
         if @hardware.device_type == "Tablet"
           @tablet = true
         end
@@ -136,18 +141,21 @@ class HardwaresController < ApplicationController
         if @hardware.device_type == "Printer"
           @printer = true
         end
-        if @hardware.truck
+        if @hardware.device_type == "Other"
+          @other = true
+        end
+      if @hardware.truck
           @employee_list = @trucks
         end
       end
 
-      @device = ["Desktop", "Laptop", "Phone", "Printer", "Tablet"]
+      @device = ["Desktop", "iPad", "Laptop", "Phone", "Printer", "Tablet", "Other"]
       @disposal_reason = ["Broken", "Lost", "Obsolete", "Stolen"]
       @os = ["Windows 7", "Windows 10", "Mac OS"]
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def hardware_params
-      params.require(:hardware).permit(:owner, :host, :os, :os_version, :install_date, :boot_time, :make, :model, :type, :processor, :physical_memory, :available_physical_memory, :serial_number, :issue_date, :return_date, :employee_id, :truck, :dock, :monitor, :disposed_date, :disposed_reason, :computer_name, :phone_number, :imei, :toner_ink, :device_type, :receive_date)
+      params.require(:hardware).permit(:owner, :host, :os, :os_version, :install_date, :boot_time, :make, :model, :type, :processor, :physical_memory, :available_physical_memory, :serial_number, :issue_date, :return_date, :employee_id, :truck, :dock, :monitor, :disposed_date, :disposed_reason, :computer_name, :phone_number, :imei, :toner_ink, :device_type, :receive_date, :manufacture_year)
     end
 end
